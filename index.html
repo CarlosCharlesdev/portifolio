@@ -547,6 +547,36 @@
     line-height: 1.8;
   }
 
+  .portfolio-item {
+  position: relative;
+  overflow: hidden;
+    display: block;
+  position: relative;
+  text-decoration: none;
+}
+
+.portfolio-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+
+.portfolio-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  color: #fff;
+}
+
+.portfolio-overlay {
+  pointer-events: none;
+}
+
   .portfolio-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -944,7 +974,7 @@
       Desenvolvemos landing pages, SaaS, e softwares web de alta conversão. Entrega rápida, design profissional e foco total em resultados para o seu negócio.
     </p>
     <div class="hero-btns">
-      <a href="https://wa.me/5500000000000?text=Ol%C3%A1%2C+vim+pelo+portf%C3%B3lio+e+quero+um+site!" class="btn-primary" target="_blank">Pedir Orçamento</a>
+      <a href="https://wa.me/556992700080?text=Ol%C3%A1%2C+vim+pelo+portf%C3%B3lio+e+quero+um+site!" class="btn-primary" target="_blank">Pedir Orçamento</a>
       <a href="#portfolio" class="btn-secondary">Ver Trabalhos</a>
     </div>
   </div>
@@ -1028,193 +1058,41 @@
   </div>
   <div class="portfolio-grid">
 
-    <!-- ITEM 1: SaaS Dashboard - full width -->
-    <div class="portfolio-item pitem-1" style="background:#0d1117;">
-      <svg width="100%" height="100%" viewBox="0 0 900 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-        <!-- sidebar -->
-        <rect width="160" height="360" fill="#161b22"/>
-        <rect x="16" y="20" width="128" height="28" rx="6" fill="#1f2937"/>
-        <text x="80" y="39" text-anchor="middle" font-family="monospace" font-size="11" font-weight="700" fill="#e5e7eb" letter-spacing="2">GESTÃO PRO</text>
-        <rect x="12" y="70" width="136" height="32" rx="5" fill="#3b82f6" opacity="0.15"/>
-        <rect x="20" y="79" width="10" height="10" rx="2" fill="#3b82f6"/>
-        <text x="38" y="89" font-family="sans-serif" font-size="11" fill="#93c5fd">Dashboard</text>
-        <rect x="20" y="118" width="10" height="10" rx="2" fill="#6b7280"/>
-        <text x="38" y="128" font-family="sans-serif" font-size="11" fill="#6b7280">Clientes</text>
-        <rect x="20" y="148" width="10" height="10" rx="2" fill="#6b7280"/>
-        <text x="38" y="158" font-family="sans-serif" font-size="11" fill="#6b7280">Financeiro</text>
-        <rect x="20" y="178" width="10" height="10" rx="2" fill="#6b7280"/>
-        <text x="38" y="188" font-family="sans-serif" font-size="11" fill="#6b7280">Relatórios</text>
-        <rect x="20" y="208" width="10" height="10" rx="2" fill="#6b7280"/>
-        <text x="38" y="218" font-family="sans-serif" font-size="11" fill="#6b7280">Configurações</text>
-        <!-- main area -->
-        <rect x="160" width="740" height="360" fill="#0d1117"/>
-        <!-- topbar -->
-        <rect x="160" y="0" width="740" height="44" fill="#161b22"/>
-        <text x="184" y="27" font-family="sans-serif" font-size="13" font-weight="600" fill="#f9fafb">Visão Geral</text>
-        <rect x="720" y="10" width="80" height="24" rx="4" fill="#3b82f6"/>
-        <text x="760" y="26" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#fff">+ Novo Projeto</text>
-        <rect x="820" y="12" width="22" height="22" rx="11" fill="#374151"/>
-        <!-- stat cards -->
-        <rect x="180" y="60" width="152" height="72" rx="6" fill="#161b22" stroke="#21262d" stroke-width="0.5"/>
-        <text x="196" y="82" font-family="sans-serif" font-size="10" fill="#6b7280">Receita Mensal</text>
-        <text x="196" y="108" font-family="sans-serif" font-size="20" font-weight="700" fill="#f9fafb">R$48.290</text>
-        <text x="196" y="122" font-family="sans-serif" font-size="9" fill="#22c55e">▲ 12.4% vs mês ant.</text>
+        <!-- ITEM 1: SaaS Dashboard - full width -->
+    <div class="portfolio-item">
+    <a href="https://alexandervini.github.io/projLandingPageFotografia/" target="_blank">
+        <img src="image1.png" alt="Projeto Dashboard" class="portfolio-img">
+    </a>
 
-        <rect x="344" y="60" width="152" height="72" rx="6" fill="#161b22" stroke="#21262d" stroke-width="0.5"/>
-        <text x="360" y="82" font-family="sans-serif" font-size="10" fill="#6b7280">Novos Clientes</text>
-        <text x="360" y="108" font-family="sans-serif" font-size="20" font-weight="700" fill="#f9fafb">284</text>
-        <text x="360" y="122" font-family="sans-serif" font-size="9" fill="#22c55e">▲ 8.1% vs mês ant.</text>
-
-        <rect x="508" y="60" width="152" height="72" rx="6" fill="#161b22" stroke="#21262d" stroke-width="0.5"/>
-        <text x="524" y="82" font-family="sans-serif" font-size="10" fill="#6b7280">Taxa Conversão</text>
-        <text x="524" y="108" font-family="sans-serif" font-size="20" font-weight="700" fill="#f9fafb">3.82%</text>
-        <text x="524" y="122" font-family="sans-serif" font-size="9" fill="#ef4444">▼ 0.3% vs mês ant.</text>
-
-        <rect x="672" y="60" width="152" height="72" rx="6" fill="#161b22" stroke="#21262d" stroke-width="0.5"/>
-        <text x="688" y="82" font-family="sans-serif" font-size="10" fill="#6b7280">Projetos Ativos</text>
-        <text x="688" y="108" font-family="sans-serif" font-size="20" font-weight="700" fill="#f9fafb">17</text>
-        <text x="688" y="122" font-family="sans-serif" font-size="9" fill="#22c55e">▲ 3 novos</text>
-
-        <!-- chart area -->
-        <rect x="180" y="148" width="460" height="180" rx="6" fill="#161b22" stroke="#21262d" stroke-width="0.5"/>
-        <text x="196" y="170" font-family="sans-serif" font-size="11" font-weight="600" fill="#f9fafb">Receita — últimos 6 meses</text>
-        <!-- bars -->
-        <rect x="210" y="248" width="40" height="54" rx="2" fill="#3b82f6" opacity="0.5"/>
-        <rect x="270" y="228" width="40" height="74" rx="2" fill="#3b82f6" opacity="0.6"/>
-        <rect x="330" y="210" width="40" height="92" rx="2" fill="#3b82f6" opacity="0.7"/>
-        <rect x="390" y="236" width="40" height="66" rx="2" fill="#3b82f6" opacity="0.6"/>
-        <rect x="450" y="200" width="40" height="102" rx="2" fill="#3b82f6" opacity="0.8"/>
-        <rect x="510" y="185" width="40" height="117" rx="2" fill="#3b82f6"/>
-        <!-- x labels -->
-        <text x="230" y="318" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#6b7280">Jul</text>
-        <text x="290" y="318" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#6b7280">Ago</text>
-        <text x="350" y="318" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#6b7280">Set</text>
-        <text x="410" y="318" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#6b7280">Out</text>
-        <text x="470" y="318" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#6b7280">Nov</text>
-        <text x="530" y="318" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#6b7280">Dez</text>
-
-        <!-- right panel: recent activity -->
-        <rect x="656" y="148" width="184" height="180" rx="6" fill="#161b22" stroke="#21262d" stroke-width="0.5"/>
-        <text x="672" y="170" font-family="sans-serif" font-size="11" font-weight="600" fill="#f9fafb">Atividade Recente</text>
-        <line x1="672" y1="178" x2="824" y2="178" stroke="#21262d" stroke-width="0.5"/>
-        <circle cx="682" cy="198" r="5" fill="#22c55e"/>
-        <text x="694" y="202" font-family="sans-serif" font-size="10" fill="#d1d5db">Novo cliente cadastrado</text>
-        <text x="694" y="214" font-family="sans-serif" font-size="9" fill="#6b7280">há 3 minutos</text>
-        <circle cx="682" cy="232" r="5" fill="#3b82f6"/>
-        <text x="694" y="236" font-family="sans-serif" font-size="10" fill="#d1d5db">Pagamento confirmado</text>
-        <text x="694" y="248" font-family="sans-serif" font-size="9" fill="#6b7280">há 18 minutos</text>
-        <circle cx="682" cy="266" r="5" fill="#f59e0b"/>
-        <text x="694" y="270" font-family="sans-serif" font-size="10" fill="#d1d5db">Proposta enviada</text>
-        <text x="694" y="282" font-family="sans-serif" font-size="9" fill="#6b7280">há 1 hora</text>
-        <circle cx="682" cy="300" r="5" fill="#22c55e"/>
-        <text x="694" y="304" font-family="sans-serif" font-size="10" fill="#d1d5db">Projeto finalizado</text>
-        <text x="694" y="316" font-family="sans-serif" font-size="9" fill="#6b7280">há 2 horas</text>
-      </svg>
-      <div class="portfolio-overlay">
-        <div class="portfolio-tag">SaaS · Dashboard</div>
-        <div class="portfolio-name">GESTÃO PRO — Plataforma de Gestão</div>
-      </div>
+    <div class="portfolio-overlay">
+        <div class="portfolio-tag">Landing page</div>
+        <div class="portfolio-name"> Fotógrafo — Pagina Fotógrafo</div>
+    </div>
     </div>
 
     <!-- ITEM 2: Landing Page infoproduto -->
-    <div class="portfolio-item pitem-2" style="background:#0a0a0a;">
-      <svg width="100%" height="100%" viewBox="0 0 440 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-        <!-- nav -->
-        <rect width="440" height="36" fill="#111"/>
-        <text x="22" y="23" font-family="monospace" font-size="12" font-weight="700" fill="#fff" letter-spacing="2">ELITE</text>
-        <rect x="340" y="10" width="80" height="18" rx="3" fill="#fff"/>
-        <text x="380" y="22" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="600" fill="#000">INSCREVER-SE</text>
-        <!-- hero section -->
-        <rect x="0" y="36" width="440" height="140" fill="#0a0a0a"/>
-        <!-- big heading -->
-        <text x="220" y="78" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#888" letter-spacing="4">MÉTODO COMPROVADO</text>
-        <text x="220" y="104" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#fff">Domine o Marketing</text>
-        <text x="220" y="126" text-anchor="middle" font-family="Georgia,serif" font-size="24" font-weight="700" fill="#f59e0b">Digital em 30 dias</text>
-        <text x="220" y="148" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#888">Aprenda com quem faturou R$2M com tráfego pago</text>
-        <!-- CTA button -->
-        <rect x="130" y="158" width="180" height="32" rx="4" fill="#f59e0b"/>
-        <text x="220" y="178" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#000">QUERO ENTRAR AGORA</text>
-        <!-- social proof row -->
-        <rect x="0" y="176" width="440" height="1" fill="#222"/>
-        <rect x="0" y="177" width="440" height="36" fill="#111"/>
-        <text x="60" y="200" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#fff">+4.200</text>
-        <text x="60" y="210" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#888">ALUNOS</text>
-        <text x="220" y="200" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#f59e0b">98%</text>
-        <text x="220" y="210" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#888">APROVAÇÃO</text>
-        <text x="370" y="200" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#fff">30</text>
-        <text x="370" y="210" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#888">DIAS GARANTIA</text>
-        <!-- features section -->
-        <rect x="0" y="213" width="440" height="67" fill="#0a0a0a"/>
-        <rect x="20" y="222" width="120" height="48" rx="4" fill="#161616" stroke="#2a2a2a" stroke-width="0.5"/>
-        <text x="80" y="244" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="600" fill="#f59e0b">▶ VÍDEO AULAS</text>
-        <text x="80" y="258" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#666">+80h de conteúdo</text>
-        <rect x="160" y="222" width="120" height="48" rx="4" fill="#161616" stroke="#2a2a2a" stroke-width="0.5"/>
-        <text x="220" y="244" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="600" fill="#f59e0b">◈ COMUNIDADE</text>
-        <text x="220" y="258" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#666">Suporte 24/7</text>
-        <rect x="300" y="222" width="120" height="48" rx="4" fill="#161616" stroke="#2a2a2a" stroke-width="0.5"/>
-        <text x="360" y="244" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="600" fill="#f59e0b">✓ CERTIFICADO</text>
-        <text x="360" y="258" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#666">Reconhecido</text>
-      </svg>
-      <div class="portfolio-overlay">
-        <div class="portfolio-tag">Landing Page · Infoproduto</div>
-        <div class="portfolio-name">CURSO ELITE — Alta Conversão</div>
-      </div>
-    </div>
+        <div class="portfolio-item">
+        <a href="https://carloscharlesdev.github.io/Psicologo3/" target="_blank">
+            <img src="image3.png" alt="Projeto Dashboard" class="portfolio-img">
+        </a>
+
+        <div class="portfolio-overlay">
+            <div class="portfolio-tag">Landing page</div>
+            <div class="portfolio-name">Psicólogo - Pagina</div>
+        </div>
+        </div>
 
     <!-- ITEM 3: E-commerce moda premium -->
-    <div class="portfolio-item pitem-3" style="background:#fafafa;">
-      <svg width="100%" height="100%" viewBox="0 0 440 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-        <!-- nav white -->
-        <rect width="440" height="40" fill="#fff"/>
-        <line x1="0" y1="40" x2="440" y2="40" stroke="#e5e7eb" stroke-width="0.5"/>
-        <text x="220" y="25" text-anchor="middle" font-family="Georgia,serif" font-size="14" font-weight="700" fill="#111" letter-spacing="4">BRAND STORE</text>
-        <text x="16" y="24" font-family="sans-serif" font-size="9" fill="#555">Feminino</text>
-        <text x="58" y="24" font-family="sans-serif" font-size="9" fill="#555">Masculino</text>
-        <text x="100" y="24" font-family="sans-serif" font-size="9" fill="#555">Coleções</text>
-        <text x="396" y="24" font-family="sans-serif" font-size="14" fill="#111">♡</text>
-        <text x="416" y="24" font-family="sans-serif" font-size="11" fill="#111">⊕</text>
-        <!-- hero banner -->
-        <rect x="0" y="40" width="440" height="100" fill="#1a1a1a"/>
-        <text x="220" y="78" text-anchor="middle" font-family="Georgia,serif" font-size="9" fill="#aaa" letter-spacing="6">NOVA COLEÇÃO</text>
-        <text x="220" y="100" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#fff">Inverno 2025</text>
-        <text x="220" y="118" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#888">Elegância redefinida para os dias frios</text>
-        <rect x="175" y="126" width="90" height="22" rx="0" fill="#fff"/>
-        <text x="220" y="141" text-anchor="middle" font-family="sans-serif" font-size="9" font-weight="700" fill="#000" letter-spacing="2">EXPLORAR</text>
-        <!-- product grid -->
-        <rect x="0" y="140" width="440" height="10" fill="#f9f9f9"/>
-        <text x="220" y="158" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#999" letter-spacing="3">MAIS VENDIDOS</text>
-        <!-- product cards -->
-        <rect x="12" y="164" width="96" height="108" rx="2" fill="#f3f4f6"/>
-        <rect x="12" y="224" width="96" height="48" rx="0" fill="#fff" stroke="#e5e7eb" stroke-width="0.5"/>
-        <text x="60" y="237" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#666">Blazer Linho</text>
-        <text x="60" y="250" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#111">R$ 389</text>
-        <text x="60" y="262" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#999">P · M · G · GG</text>
+    <div class="portfolio-item">
+    <a href="https://carloscharlesdev.github.io/odonto-page/" target="_blank">
+        <img src="image.png" alt="Projeto Dashboard" class="portfolio-img">
+    </a>
 
-        <rect x="118" y="164" width="96" height="108" rx="2" fill="#e8e4dc"/>
-        <rect x="118" y="224" width="96" height="48" rx="0" fill="#fff" stroke="#e5e7eb" stroke-width="0.5"/>
-        <text x="166" y="237" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#666">Casaco Camel</text>
-        <text x="166" y="250" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#111">R$ 697</text>
-        <text x="166" y="262" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#c00">● ÚLTIMAS PEÇAS</text>
-
-        <rect x="224" y="164" width="96" height="108" rx="2" fill="#d1d5db"/>
-        <rect x="224" y="224" width="96" height="48" rx="0" fill="#fff" stroke="#e5e7eb" stroke-width="0.5"/>
-        <text x="272" y="237" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#666">Calça Alfaiataria</text>
-        <text x="272" y="250" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#111">R$ 459</text>
-        <text x="272" y="262" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#999">P · M · G · GG</text>
-
-        <rect x="330" y="164" width="96" height="108" rx="2" fill="#1a1a1a"/>
-        <rect x="330" y="224" width="96" height="48" rx="0" fill="#fff" stroke="#e5e7eb" stroke-width="0.5"/>
-        <text x="378" y="237" text-anchor="middle" font-family="sans-serif" font-size="8" fill="#666">Sobretudo Preto</text>
-        <text x="378" y="250" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="700" fill="#111">R$ 890</text>
-        <text x="378" y="262" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#999">P · M · G</text>
-        <!-- bottom bar -->
-        <line x1="0" y1="272" x2="440" y2="272" stroke="#e5e7eb" stroke-width="0.5"/>
-        <text x="220" y="278" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#bbb">Frete grátis acima de R$299 · Troca gratuita · Parcele em 12x</text>
-      </svg>
-      <div class="portfolio-overlay">
-        <div class="portfolio-tag">E-commerce · Moda Premium</div>
-        <div class="portfolio-name">BRAND STORE — Loja Online</div>
-      </div>
+    <div class="portfolio-overlay">
+        <div class="portfolio-tag">Landing page</div>
+        <div class="portfolio-name">Odontologia</div>
+    </div>
+    </div>
     </div>
 
       <div class="portfolio-overlay">
