@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEBCRAFT — Websites que Convertem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Editorial+New:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --black: #060606;
+    --white: #f5f4f0;
+    --gray: #a0a0a0;
+    --gray-dark: #1a1a1a;
+    --gray-mid: #2e2e2e;
+    --accent: #e8e4dc;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--white);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 40px; height: 40px;
+    border: 1px solid rgba(245,244,240,0.4);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    z-index: 900;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
+    background: rgba(6,6,6,0.7);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    background: var(--white);
+    color: var(--black) !important;
+    padding: 10px 24px;
+    font-weight: 500;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--accent) !important; color: var(--black) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 48px;
+    padding-top: 100px;
+    gap: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 80px;
+    padding-bottom: 80px;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gray);
+    display: block;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 8vw, 130px);
+    line-height: 0.92;
+    letter-spacing: -1px;
+    margin-bottom: 40px;
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-title span {
+    display: block;
+    color: var(--gray);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+    max-width: 420px;
+    margin-bottom: 52px;
+    animation: fadeUp 1s 0.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    animation: fadeUp 1s 0.35s ease forwards;
+    opacity: 0;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--black);
+    padding: 16px 36px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    padding: 16px 36px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    cursor: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  .hero-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    animation: fadeIn 1.2s 0.3s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 3/4;
+    border: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    overflow: hidden;
+    background: var(--gray-dark);
+  }
+
+  .hero-visual-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mock-bar {
+    height: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 8px;
+    background: rgba(0,0,0,0.3);
+  }
+  .mock-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.12); }
+
+  .mock-content {
+    flex: 1;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mock-hero-block {
+    background: rgba(255,255,255,0.04);
+    height: 120px;
+    border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mock-hero-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 3px;
+    opacity: 0.2;
+  }
+
+  .mock-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .mock-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    height: 70px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mock-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .mock-btn {
+    background: rgba(255,255,255,0.9);
+    height: 36px;
+    width: 60%;
+    margin-top: 4px;
+  }
+
+  .mock-line { height: 8px; background: rgba(255,255,255,0.06); margin-bottom: 8px; }
+  .mock-line.short { width: 60%; }
+  .mock-lines { padding: 16px; }
+
+  .stats-row {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: auto;
+  }
+
+  .stat-item {
+    flex: 1;
+    padding: 24px 28px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* TICKER */
+  .ticker {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    overflow: hidden;
+    padding: 16px 0;
+    background: var(--gray-dark);
+  }
+
+  .ticker-inner {
+    display: flex;
+    gap: 0;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 40px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    flex-shrink: 0;
+  }
+
+  .ticker-item span {
+    color: rgba(255,255,255,0.15);
+    font-size: 20px;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SERVICES */
+  section { padding: 120px 48px; }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .service-card {
+    background: var(--black);
+    padding: 52px 40px;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: var(--white);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: rgba(255,255,255,0.02); }
+
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(255,255,255,0.05);
+    line-height: 1;
+    margin-bottom: 32px;
+    letter-spacing: 2px;
+  }
+
+  .service-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .service-desc {
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--gray);
+    margin-bottom: 32px;
+  }
+
+  .service-price {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--white);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 20px;
+    margin-top: auto;
+  }
+
+  .service-price strong {
+    font-size: 22px;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 2px;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* PROCESS */
+  .process-section { border-top: 1px solid rgba(255,255,255,0.08); }
+
+  .process-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 90px);
+    line-height: 0.95;
+    letter-spacing: -1px;
+    margin-bottom: 80px;
+    max-width: 600px;
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .process-item {
+    background: var(--black);
+    padding: 52px 48px;
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 32px;
+    align-items: start;
+    border-bottom: none;
+    transition: background 0.3s;
+  }
+  .process-item:hover { background: rgba(255,255,255,0.02); }
+
+  .process-step {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: rgba(255,255,255,0.12);
+    line-height: 1;
+  }
+
+  .process-body h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  .process-body p {
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--gray);
+  }
+
+  /* PORTFOLIO */
+  .portfolio-section { border-top: 1px solid rgba(255,255,255,0.08); }
+
+  .portfolio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 64px;
+  }
+
+  .portfolio-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 90px);
+    line-height: 0.95;
+    letter-spacing: -1px;
+  }
+
+  .portfolio-note {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+    max-width: 220px;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .portfolio-item {
+    background: var(--black);
+    aspect-ratio: 16/10;
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+  }
+
+  .portfolio-item:first-child {
+    grid-column: span 2;
+    aspect-ratio: 16/7;
+  }
+
+  .portfolio-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 100px;
+    color: rgba(255,255,255,0.03);
+    letter-spacing: 8px;
+    transition: transform 0.6s ease;
+  }
+
+  .portfolio-item:hover .portfolio-bg { transform: scale(1.05); }
+
+  .portfolio-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+  .portfolio-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+
+  .portfolio-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+  }
+
+  /* Portfolio mock visuals */
+  .pmock {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .pm-header { height: 28px; background: rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+  .pm-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.08); }
+  .pm-body { flex: 1; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .pm-hero-l { height: 50px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; }
+  .pm-hero-txt { font-family: 'Bebas Neue'; font-size: 16px; letter-spacing: 2px; opacity: 0.15; }
+  .pm-row { display: flex; gap: 8px; }
+  .pm-block { flex: 1; height: 30px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); }
+  .pm-cta { height: 24px; width: 80px; background: rgba(255,255,255,0.8); }
+  .pm-line { height: 5px; background: rgba(255,255,255,0.05); border-radius: 2px; }
+  .pm-line.s { width: 55%; }
+  .pm-line.m { width: 75%; }
+
+  .pitem-1 { background: var(--gray-dark); }
+  .pitem-2 { background: #0d0d0d; }
+  .pitem-3 { background: #111; }
+  .pitem-4 { background: #0a0a0a; }
+  .pitem-5 { background: #131313; }
+
+  /* TESTIMONIALS */
+  .testi-section { border-top: 1px solid rgba(255,255,255,0.08); }
+
+  .testi-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 90px);
+    letter-spacing: -1px;
+    margin-bottom: 64px;
+    line-height: 0.95;
+  }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .testi-card {
+    background: var(--black);
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    transition: background 0.3s;
+  }
+  .testi-card:hover { background: rgba(255,255,255,0.02); }
+
+  .testi-quote {
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--accent);
+    font-style: italic;
+  }
+
+  .testi-author {
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 24px;
+  }
+
+  .testi-name {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+
+  .testi-role {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  /* CTA */
+  .cta-section {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    background: var(--white);
+    color: var(--black);
+    padding: 120px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'CONTRATE';
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 280px;
+    color: rgba(0,0,0,0.04);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 20px;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .cta-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.4);
+    margin-bottom: 32px;
+  }
+
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 8vw, 130px);
+    line-height: 0.92;
+    letter-spacing: -2px;
+    margin-bottom: 40px;
+    color: var(--black);
+  }
+
+  .cta-sub {
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 52px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .btn-dark {
+    background: var(--black);
+    color: var(--white);
+    padding: 18px 48px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: none;
+    cursor: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-dark:hover { background: #1a1a1a; transform: translateY(-2px); }
+
+  .btn-outline-dark {
+    border: 1px solid rgba(0,0,0,0.2);
+    color: var(--black);
+    padding: 18px 48px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    cursor: none;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .btn-outline-dark:hover { border-color: var(--black); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 64px 48px 40px;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 80px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .footer-brand .logo {
+    display: block;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .footer-brand p {
+    font-size: 12px;
+    line-height: 1.9;
+    color: var(--gray);
+    max-width: 240px;
+  }
+
+  .footer-col h4 {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 24px;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col li {
+    margin-bottom: 14px;
+  }
+
+  .footer-col a {
+    color: var(--gray);
+    text-decoration: none;
+    font-size: 12px;
+    transition: color 0.2s;
+    letter-spacing: 0.5px;
+  }
+  .footer-col a:hover { color: var(--white); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+  }
+
+  .footer-whatsapp {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 14px 28px;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .footer-whatsapp:hover { background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+
+  .wa-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .animate.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-delay-1 { transition-delay: 0.1s; }
+  .animate-delay-2 { transition-delay: 0.2s; }
+  .animate-delay-3 { transition-delay: 0.3s; }
+  .animate-delay-4 { transition-delay: 0.4s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 80px 24px 60px; }
+    .hero-left { padding-right: 0; }
+    .hero-right { display: none; }
+    section { padding: 80px 24px; }
+    .services-grid, .testi-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-item:first-child { grid-column: span 1; aspect-ratio: 16/10; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .stats-row { flex-wrap: wrap; }
+    .cta-section { padding: 80px 24px; }
+    .cta-section::before { font-size: 100px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">WEBCRAFT</a>
+  <ul class="nav-links">
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#portfolio">Portfólio</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#contato" class="nav-cta">Falar Agora</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-left">
+    <div class="hero-tag">Agência de Desenvolvimento Web</div>
+    <h1 class="hero-title">
+      SITES QUE
+      <span>VENDEM</span>
+      24/7
+    </h1>
+    <p class="hero-sub">
+      Desenvolvemos landing pages, SaaS, e softwares web de alta conversão. Entrega rápida, design profissional e foco total em resultados para o seu negócio.
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/5500000000000?text=Ol%C3%A1%2C+vim+pelo+portf%C3%B3lio+e+quero+um+site!" class="btn-primary" target="_blank">Pedir Orçamento</a>
+      <a href="#portfolio" class="btn-secondary">Ver Trabalhos</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual">
+      <div class="hero-visual-inner">
+        <div class="mock-bar">
+          <div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div>
+        </div>
+        <div class="mock-content">
+          <div class="mock-hero-block"><span class="mock-hero-txt">LANDING PAGE</span></div>
+          <div class="mock-lines">
+            <div class="mock-line"></div>
+            <div class="mock-line short"></div>
+          </div>
+          <div class="mock-row">
+            <div class="mock-card"></div>
+            <div class="mock-card"></div>
+          </div>
+          <div class="mock-btn"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-item animate">
+    <div class="stat-num">3X</div>
+    <div class="stat-label">Landing Pages por Hora</div>
+  </div>
+  <div class="stat-item animate animate-delay-1">
+    <div class="stat-num">+80</div>
+    <div class="stat-label">Projetos Entregues</div>
+  </div>
+  <div class="stat-item animate animate-delay-2">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Clientes Satisfeitos</div>
+  </div>
+  <div class="stat-item animate animate-delay-3">
+    <div class="stat-num">48H</div>
+    <div class="stat-label">Prazo Médio de Entrega</div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item">Landing Page <span>·</span></div>
+    <div class="ticker-item">SaaS <span>·</span></div>
+    <div class="ticker-item">Software Web <span>·</span></div>
+    <div class="ticker-item">E-commerce <span>·</span></div>
+    <div class="ticker-item">Alta Conversão <span>·</span></div>
+    <div class="ticker-item">Entrega Rápida <span>·</span></div>
+    <div class="ticker-item">Design Profissional <span>·</span></div>
+    <div class="ticker-item">Landing Page <span>·</span></div>
+    <div class="ticker-item">SaaS <span>·</span></div>
+    <div class="ticker-item">Software Web <span>·</span></div>
+    <div class="ticker-item">E-commerce <span>·</span></div>
+    <div class="ticker-item">Alta Conversão <span>·</span></div>
+    <div class="ticker-item">Entrega Rápida <span>·</span></div>
+    <div class="ticker-item">Design Profissional <span>·</span></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="servicos">
+  <div class="section-label animate">Nossos Serviços</div>
+  <div class="services-grid">
+    <div class="service-card animate">
+      <div class="service-num">01</div>
+      <div class="service-title">Landing Page</div>
+      <p class="service-desc">Páginas de alta conversão criadas para transformar visitantes em clientes. Design focado em CTA, copy persuasivo e velocidade de carregamento.</p>
+      <div class="service-price">
+        A partir de
+        <strong>R$ 497</strong>
+      </div>
+    </div>
+    <div class="service-card animate animate-delay-1">
+      <div class="service-num">02</div>
+      <div class="service-title">SaaS / Software Web</div>
+      <p class="service-desc">Desenvolvimento completo de plataformas SaaS, dashboards, sistemas de gestão e aplicações web. Stack moderna, escalável e segura.</p>
+      <div class="service-price">
+        A partir de
+        <strong>R$ 2.997</strong>
+      </div>
+    </div>
+    <div class="service-card animate animate-delay-2">
+      <div class="service-num">03</div>
+      <div class="service-title">Site Institucional</div>
+      <p class="service-desc">Presença digital profissional para sua empresa. Páginas estratégicas que geram autoridade, confiança e capturam leads qualificados.</p>
+      <div class="service-price">
+        A partir de
+        <strong>R$ 997</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio-section" id="portfolio">
+  <div class="portfolio-header animate">
+    <h2 class="portfolio-title">TRABALHOS<br>RECENTES</h2>
+    <p class="portfolio-note">3 landing pages por hora — velocidade sem abrir mão da qualidade</p>
+  </div>
+  <div class="portfolio-grid">
+
+    <div class="portfolio-item pitem-1">
+      <div class="pmock">
+        <div class="pm-header"><div class="pm-dot"></div><div class="pm-dot"></div><div class="pm-dot"></div></div>
+        <div class="pm-body">
+          <div class="pm-hero-l"><span class="pm-hero-txt">SAAS PLATFORM</span></div>
+          <div class="pm-row"><div class="pm-block"></div><div class="pm-block"></div><div class="pm-block"></div></div>
+          <div class="pm-line m"></div><div class="pm-line s"></div>
+          <div class="pm-row"><div class="pm-block"></div><div class="pm-block"></div></div>
+          <div class="pm-cta"></div>
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-tag">SaaS · Dashboard</div>
+        <div class="portfolio-name">GESTÃO PRO — Plataforma de Gestão</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item pitem-2">
+      <div class="pmock">
+        <div class="pm-header"><div class="pm-dot"></div><div class="pm-dot"></div><div class="pm-dot"></div></div>
+        <div class="pm-body">
+          <div class="pm-hero-l"><span class="pm-hero-txt">LANDING PAGE</span></div>
+          <div class="pm-line"></div><div class="pm-line s"></div>
+          <div class="pm-cta"></div>
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-tag">Landing Page · Infoproduto</div>
+        <div class="portfolio-name">CURSO ELITE — Alta Conversão</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item pitem-3">
+      <div class="pmock">
+        <div class="pm-header"><div class="pm-dot"></div><div class="pm-dot"></div><div class="pm-dot"></div></div>
+        <div class="pm-body">
+          <div class="pm-hero-l"><span class="pm-hero-txt">E-COMMERCE</span></div>
+          <div class="pm-row"><div class="pm-block"></div><div class="pm-block"></div></div>
+          <div class="pm-line m"></div>
+          <div class="pm-cta"></div>
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-tag">E-commerce · Loja Online</div>
+        <div class="portfolio-name">BRAND STORE — Moda Premium</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item pitem-4">
+      <div class="pmock">
+        <div class="pm-header"><div class="pm-dot"></div><div class="pm-dot"></div><div class="pm-dot"></div></div>
+        <div class="pm-body">
+          <div class="pm-hero-l"><span class="pm-hero-txt">INSTITUCIONAL</span></div>
+          <div class="pm-line m"></div><div class="pm-line s"></div>
+          <div class="pm-row"><div class="pm-block"></div><div class="pm-block"></div><div class="pm-block"></div></div>
+          <div class="pm-cta"></div>
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-tag">Institucional · Advocacia</div>
+        <div class="portfolio-name">LEX JURIDICO — Site Corporativo</div>
+      </div>
+    </div>
+
+    <div class="portfolio-item pitem-5">
+      <div class="pmock">
+        <div class="pm-header"><div class="pm-dot"></div><div class="pm-dot"></div><div class="pm-dot"></div></div>
+        <div class="pm-body">
+          <div class="pm-hero-l"><span class="pm-hero-txt">APP WEB</span></div>
+          <div class="pm-row"><div class="pm-block"></div><div class="pm-block"></div></div>
+          <div class="pm-line"></div>
+          <div class="pm-cta"></div>
+        </div>
+      </div>
+      <div class="portfolio-overlay">
+        <div class="portfolio-tag">Software Web · Fintech</div>
+        <div class="portfolio-name">PAGO FÁCIL — App Financeiro</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="processo">
+  <div class="section-label animate">Como Trabalhamos</div>
+  <h2 class="process-heading animate">DO BRIEFING<br>AO AR</h2>
+  <div class="process-grid">
+    <div class="process-item animate">
+      <div class="process-step">01</div>
+      <div class="process-body">
+        <h3>Briefing & Estratégia</h3>
+        <p>Entendemos seu negócio, público-alvo e objetivos. Definimos a estratégia de conversão antes de escrever uma linha de código.</p>
+      </div>
+    </div>
+    <div class="process-item animate animate-delay-1">
+      <div class="process-step">02</div>
+      <div class="process-body">
+        <h3>Design & Wireframe</h3>
+        <p>Criamos o layout estratégico da página com foco total em UX e conversão. Você aprova antes de desenvolver.</p>
+      </div>
+    </div>
+    <div class="process-item animate animate-delay-2">
+      <div class="process-step">03</div>
+      <div class="process-body">
+        <h3>Desenvolvimento</h3>
+        <p>Código limpo, rápido e responsivo. Entregamos até 3 landing pages por hora para projetos de alto volume.</p>
+      </div>
+    </div>
+    <div class="process-item animate animate-delay-3">
+      <div class="process-step">04</div>
+      <div class="process-body">
+        <h3>Entrega & Suporte</h3>
+        <p>Publicamos, configuramos e entregamos tudo funcionando. Suporte pós-entrega incluso para ajustes e otimizações.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="section-label animate">Depoimentos</div>
+  <h2 class="testi-title animate">O QUE OS<br>CLIENTES DIZEM</h2>
+  <div class="testi-grid">
+    <div class="testi-card animate">
+      <p class="testi-quote">"Recebemos a landing page em menos de 48 horas e a taxa de conversão subiu 340% no primeiro mês. Trabalho impecável."</p>
+      <div class="testi-author">
+        <div class="testi-name">Carlos Mendonça</div>
+        <div class="testi-role">CEO · Mendonça Educação</div>
+      </div>
+    </div>
+    <div class="testi-card animate animate-delay-1">
+      <p class="testi-quote">"Precisava de um SaaS completo. Entregaram antes do prazo, com qualidade muito acima do que esperava. Recomendo sem hesitar."</p>
+      <div class="testi-author">
+        <div class="testi-name">Fernanda Alves</div>
+        <div class="testi-role">Fundadora · ClinicaHub</div>
+      </div>
+    </div>
+    <div class="testi-card animate animate-delay-2">
+      <p class="testi-quote">"Contratei para fazer 12 landing pages. A velocidade e consistência de qualidade é inacreditável. Virou meu fornecedor fixo."</p>
+      <div class="testi-author">
+        <div class="testi-name">Ricardo Souza</div>
+        <div class="testi-role">Diretor de Marketing · GrupoRS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contato">
+  <div class="cta-tag">Pronto para crescer?</div>
+  <h2 class="cta-title animate">COMECE<br>HOJE</h2>
+  <p class="cta-sub">Fale conosco agora pelo WhatsApp e receba um orçamento gratuito em minutos. Sem enrolação, sem burocracia.</p>
+  <div class="cta-btns animate">
+    <a href="https://wa.me/5500000000000?text=Ol%C3%A1%2C+vim+pelo+portf%C3%B3lio+e+quero+um+or%C3%A7amento!" class="btn-dark" target="_blank">💬 WhatsApp Agora</a>
+    <a href="mailto:contato@webcraft.com.br" class="btn-outline-dark">Enviar E-mail</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo">WEBCRAFT</a>
+      <p>Desenvolvimento web de alta performance focado em conversão e resultados reais para o seu negócio.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Serviços</h4>
+      <ul>
+        <li><a href="#servicos">Landing Pages</a></li>
+        <li><a href="#servicos">Desenvolvimento SaaS</a></li>
+        <li><a href="#servicos">Software Web</a></li>
+        <li><a href="#servicos">Sites Institucionais</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#processo">Processo</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <ul>
+        <li><a href="https://wa.me/5500000000000" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:contato@webcraft.com.br">contato@webcraft.com.br</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 WEBCRAFT — Todos os direitos reservados</span>
+    <a href="https://wa.me/5500000000000?text=Quero+um+site!" class="footer-whatsapp" target="_blank">
+      <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.464 3.488"/>
+      </svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</footer>
+
+<script>
+  // CURSOR
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 6}px, ${my - 6}px)`;
+  });
+
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 20}px, ${ry - 20}px)`;
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform += ' scale(2)'; ring.style.width = '60px'; ring.style.height = '60px'; });
+    el.addEventListener('mouseleave', () => { ring.style.width = '40px'; ring.style.height = '40px'; });
+  });
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+
+  // STAT COUNTER
+  function animateCount(el, target, suffix = '') {
+    let start = 0;
+    const duration = 1800;
+    const startTime = performance.now();
+    function update(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const val = Math.round(eased * target);
+      el.textContent = (target >= 100 ? val + '%' : (suffix === 'X' ? val + 'X' : (suffix === 'H' ? val + 'H' : '+' + val)));
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const statObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const nums = e.target.querySelectorAll('.stat-num');
+        const data = [['3', 'X'], ['80', '+'], ['100', '%'], ['48', 'H']];
+        nums.forEach((n, i) => animateCount(n, parseInt(data[i][0]), data[i][1]));
+        statObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const statsRow = document.querySelector('.stats-row');
+  if (statsRow) statObserver.observe(statsRow);
+
+  // SMOOTH NAV
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
